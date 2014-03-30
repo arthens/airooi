@@ -51,9 +51,14 @@ end
 
 # Ask for a password if it wasn't provided when invoking the script
 if not options.has_key?('password')
-	print 'Password: '
-	options[:password] = STDIN.noecho(&:gets).gsub("\n", "")
-	puts ''
+	begin
+		print 'Password: '
+		options[:password] = STDIN.noecho(&:gets).gsub("\n", "")
+		puts ''
+	rescue Interrupt
+		puts ''
+		exit
+	end
 end
 
 # Connecting to the database
