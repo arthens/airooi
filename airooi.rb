@@ -77,7 +77,17 @@ end
 # Read table list
 tables = client.query("SHOW TABLES;")
 tables.each do |table|
-	puts table[table.keys.first]
+
+	table_name = table[table.keys.first]
+	columns = client.query("DESC `#{table_name}`")
+
+	columns.each do |column|
+		column_type = column["Type"].downcase
+		column_name = column["Field"]
+		if ['mediumint', 'int'].any? { |type| column_type.include?(type) }
+			puts "#{table_name}.#{column_name} is an int/mediumint"
+		end
+	end
 end
 
 
