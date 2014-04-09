@@ -11,3 +11,12 @@ Well, it doesn't do much yet, but here it is:
 ```
 ./airooi.rb -h host -u user -d database
 ```
+
+## Testing
+
+To run tests do:
+
+- `bundle install`
+- `bin/tests.rb`
+
+[![Build Status](https://travis-ci.org/arthens/airooi.svg?branch=master)](https://travis-ci.org/arthens/airooi)
