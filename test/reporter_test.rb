@@ -24,5 +24,5 @@ class TestReporter < Minitest::Test
     assert_equal 4, reporter.reports(Airooi::Reporter::INFO).count
     assert_equal 2, reporter.reports(Airooi::Reporter::WARN).count
     assert_equal 1, reporter.reports(Airooi::Reporter::ERROR).count
-  end 
+  end
 end
