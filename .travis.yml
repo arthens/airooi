@@ -4,4 +4,7 @@ rvm:
   - 2.1.0
   - 2.0.0
 
+before_script:
+  - mysql -e 'CREATE DATABASE airooi_test;'
+
 script: ./bin/tests.rb
