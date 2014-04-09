@@ -1,5 +1,5 @@
-require "minitest/autorun"
 require_relative '../lib/airooi'
+require "minitest/autorun"
 
 class TestReporter < Minitest::Test
 
