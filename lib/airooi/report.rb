@@ -1,24 +1,28 @@
 module Airooi
-    class Reporter
+    class Report
 
         INFO = "INFO"
         WARN = "WARNING"
         ERROR = "ERROR"
 
         def initialize()
-            @reports = []
+            @logs = []
         end
 
         def add(level, message)
-            @reports.push({
+            @logs.push({
                 :level => level,
                 :message => message,
             })
         end
 
-        def reports(minimum_level)
-            @reports.dup.delete_if { |report|
-                to_index(report[:level]) < to_index(minimum_level)
+        def logs
+            @logs.dup
+        end
+
+        def filter(minimum_level)
+            @logs.dup.delete_if { |log|
+                to_index(log[:level]) < to_index(minimum_level)
             }
         end
 

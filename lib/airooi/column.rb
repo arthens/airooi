@@ -1,5 +1,5 @@
 module Airooi
-  class ColumnAnalyzer
+  class Column
 
     ERROR_LEVEL = 100
     WARN_LEVEL = 75
@@ -22,9 +22,9 @@ module Airooi
 
     def level_for(perc)
       case perc
-        when 0...75 then Airooi::Reporter::INFO
-        when 75...100 then Airooi::Reporter::WARN
-        when 100 then Airooi::Reporter::ERROR
+        when 0...75 then Airooi::Report::INFO
+        when 75...100 then Airooi::Report::WARN
+        when 100 then Airooi::Report::ERROR
       end
     end
 
