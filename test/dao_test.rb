@@ -27,17 +27,8 @@ class TestDao < Minitest::Test
     assert_equal ["article", "user"], tables
   end
 
-  def test_table_info
-    info = @dao.table_info("article")
-
-    assert_equal ({
-      "id"           => "int",
-      "external_id"  => "int unsigned",
-      "author_id"    => "mediumint",
-      "count"        => "smallint",
-      "title"        => "varchar",
-      "content"      => "text",
-    }), info
+  def test_numeric_columns
+    assert_equal ["id", "external_id", "author_id", "count"], @dao.numeric_columns("article")
   end
 
   def test_max_value
@@ -47,6 +38,13 @@ class TestDao < Minitest::Test
     assert_equal 200, @dao.max_value("article", "external_id")
     assert_equal 300, @dao.max_value("article", "author_id")
     assert_equal 2, @dao.max_value("article", "count")
+  end
+
+  def test_max_allowed_value
+    assert_equal 8388607, @dao.max_allowed_value("mediumint(7)")
+    assert_equal 16777215, @dao.max_allowed_value("mediumint(7) unsigned")
+    assert_equal 2147483647, @dao.max_allowed_value("int(10)")
+    assert_equal 4294967295, @dao.max_allowed_value("int(10) unsigned")
   end
 
 end
