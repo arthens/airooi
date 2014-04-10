@@ -9,7 +9,7 @@ This might seem like an unnecessary job, but if you are working on an old codeba
 Well, it doesn't do much yet, but here it is:
 
 ```
-./airooi.rb -h host -u user -d database
+./bin/airooi.rb -h host -u user -d database
 ```
 
 ## Testing

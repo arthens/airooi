@@ -36,12 +36,18 @@ module Airooi
 
         # Return the maximum value in the specified column
         def max_value(table_name, column_name)
-            @client.query("SELECT MAX(#{column_name}) FROM #{table_name};").first.values[0]
+            result = @client.query("SELECT MAX(#{column_name}) FROM #{table_name};")
+
+            result.first.values[0] || 0
         end
 
         # Return the max allowed value
-        def max_allowed_value(type_definition)
+        def max_allowed_value(table_name, column_name)
+            definition = @client.query("DESC `#{table_name}` `#{column_name}`").first
+            max_allowed_value_per_type(definition["Type"])
+        end
 
+        def max_allowed_value_per_type(type_definition)
             # extract type and sign from the definition
             type = type_definition.match(/^(\w+)/)[0]
             is_signed = type_definition.include? "unsigned"

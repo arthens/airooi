@@ -51,9 +51,8 @@ class TestColumn < Minitest::Test
   end
 
   def setup_mock(max_value, max_allowed_value)
-    @dao_mock.expect :column_info, "int", ["news", "id"]
     @dao_mock.expect :max_value, max_value, ["news", "id"]
-    @dao_mock.expect :max_allowed_value, max_allowed_value, ["int"]
+    @dao_mock.expect :max_allowed_value, max_allowed_value, ["news", "id"]
   end
 
 end

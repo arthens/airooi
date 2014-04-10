@@ -9,9 +9,8 @@ module Airooi
     end
 
     def check_max_value(table_name, column_name)
-      definition = @dao.column_info(table_name, column_name)
       max_value = @dao.max_value(table_name, column_name)
-      max_allowed_value = @dao.max_allowed_value(definition)
+      max_allowed_value = @dao.max_allowed_value(table_name, column_name)
       perc_used = max_value * 100 / max_allowed_value
 
       level = level_for(perc_used)

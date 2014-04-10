@@ -41,10 +41,10 @@ class TestDao < Minitest::Test
   end
 
   def test_max_allowed_value
-    assert_equal 8388607, @dao.max_allowed_value("mediumint(7)")
-    assert_equal 16777215, @dao.max_allowed_value("mediumint(7) unsigned")
-    assert_equal 2147483647, @dao.max_allowed_value("int(10)")
-    assert_equal 4294967295, @dao.max_allowed_value("int(10) unsigned")
+    assert_equal 8388607, @dao.max_allowed_value_per_type("mediumint(7)")
+    assert_equal 16777215, @dao.max_allowed_value_per_type("mediumint(7) unsigned")
+    assert_equal 2147483647, @dao.max_allowed_value_per_type("int(10)")
+    assert_equal 4294967295, @dao.max_allowed_value_per_type("int(10) unsigned")
   end
 
 end
