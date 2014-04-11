@@ -12,16 +12,16 @@ class TestTable < Minitest::Test
 
   def test_analyze_table
     @dao_mock.expect :numeric_columns, ["id", "external_id", "count"], ["news"]
-    @column_mock.expect :check_max_value, [Airooi::Report::ERROR, "full"], ["news", "id"]
-    @column_mock.expect :check_max_value, [Airooi::Report::ERROR, "full"], ["news", "external_id"]
-    @column_mock.expect :check_max_value, [Airooi::Report::INFO, "ok"], ["news", "count"]
+    @column_mock.expect :check_max_value, 100, ["news", "id"]
+    @column_mock.expect :check_max_value, 85, ["news", "external_id"]
+    @column_mock.expect :check_max_value, 21, ["news", "count"]
 
     report = @analyzer.analyze_table("news")
 
     assert_equal 3, report.logs.count
-    assert_equal Airooi::Report::ERROR, report.logs[0][:level]
-    assert_equal Airooi::Report::ERROR, report.logs[1][:level]
-    assert_equal Airooi::Report::INFO, report.logs[2][:level]
+    assert_equal 100, report.logs[0][:used]
+    assert_equal 85, report.logs[1][:used]
+    assert_equal 21, report.logs[2][:used]
 
     # Empty reports are expected if the table doesn't contain numeric fields
     @dao_mock.expect :numeric_columns, [], ["news"]
@@ -32,10 +32,10 @@ class TestTable < Minitest::Test
     @dao_mock.expect :tables, ["news", "article"], []
 
     @dao_mock.expect :numeric_columns, ["id"], ["news"]
-    @column_mock.expect :check_max_value, [Airooi::Report::INFO, "ok"], ["news", "id"]
+    @column_mock.expect :check_max_value, 10, ["news", "id"]
 
     @dao_mock.expect :numeric_columns, ["id"], ["article"]
-    @column_mock.expect :check_max_value, [Airooi::Report::ERROR, "full"], ["article", "id"]
+    @column_mock.expect :check_max_value, 100, ["article", "id"]
 
     reports = @analyzer.analyze_database()
     assert_equal 2, reports.count

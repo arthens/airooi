@@ -10,9 +10,9 @@ module Airooi
     def analyze_table(table_name)
       report = Airooi::Report.new
       @dao.numeric_columns(table_name).each do |column_name|
-        result = @column.check_max_value(table_name, column_name)
+        perc_used = @column.check_max_value(table_name, column_name)
 
-        report.add(result[0], result[1])
+        report.add(column_name, perc_used)
       end
 
       return report

@@ -9,10 +9,11 @@ module Airooi
             @logs = []
         end
 
-        def add(level, message)
+        def add(column_name, percentage_used)
             @logs.push({
-                :level => level,
-                :message => message,
+                :level => level_for(percentage_used),
+                :column => column_name,
+                :used => percentage_used,
             })
         end
 
@@ -22,13 +23,21 @@ module Airooi
 
         def filter(minimum_level)
             @logs.dup.delete_if { |log|
-                to_index(log[:level]) < to_index(minimum_level)
+                order(log[:level]) < order(minimum_level)
             }
         end
 
         private
 
-        def to_index(name)
+        def level_for(perc)
+          case perc
+            when 0...75 then INFO
+            when 75...100 then WARN
+            when 100 then ERROR
+          end
+        end
+
+        def order(name)
             case name
                 when INFO then 1
                 when WARN then 2

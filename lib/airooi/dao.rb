@@ -36,7 +36,7 @@ module Airooi
 
         # Return the maximum value in the specified column
         def max_value(table_name, column_name)
-            result = @client.query("SELECT MAX(#{column_name}) FROM #{table_name};")
+            result = @client.query("SELECT MAX(`#{column_name}`) FROM `#{table_name}`;")
 
             result.first.values[0] || 0
         end

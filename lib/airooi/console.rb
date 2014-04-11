@@ -1,6 +1,7 @@
 require 'optparse'
 require 'mysql2'
 require 'io/console'
+require 'colorize'
 
 module Airooi
   class Console
@@ -40,8 +41,18 @@ module Airooi
 
     def print_reports(reports, minimum_level)
       reports.keys.each do |table_name|
-        reports[table_name].filter(minimum_level).each do |log|
-          puts "%s: %s" % [log[:level], log[:message]]
+
+        table_report = reports[table_name].filter(minimum_level)
+        puts "== %s == " % [table_name] unless table_report.empty?
+
+        table_report.each do |log|
+          color = case log[:level]
+            when Airooi::Report::INFO then :green
+            when Airooi::Report::WARN then :yellow
+            when Airooi::Report::ERROR then :red
+          end
+
+          puts "[%d%%] %s".colorize(color) % [log[:used], log[:column]]
         end
       end
     end

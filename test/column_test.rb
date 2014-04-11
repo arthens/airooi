@@ -10,44 +10,23 @@ class TestColumn < Minitest::Test
   end
 
   def test_check_max_value_when_full
-    setup_mock(100, 100)
-    ret = @analyzer.check_max_value("news", "id")
-
-    assert_equal Airooi::Report::ERROR, ret[0]
-    assert ret[1].include?("100%")
+    setup_mock(150, 150)
+    assert_equal 100, @analyzer.check_max_value("news", "id")
   end
 
   def test_check_max_value_when_80
-    setup_mock(80, 100)
-    ret = @analyzer.check_max_value("news", "id")
-
-    assert_equal Airooi::Report::WARN, ret[0]
-    assert ret[1].include?("80%")
+    setup_mock(160, 200)
+    assert_equal 80, @analyzer.check_max_value("news", "id")
   end
 
   def test_check_max_value_when_50
-    setup_mock(50, 100)
-    ret = @analyzer.check_max_value("news", "id")
-
-    assert_equal Airooi::Report::INFO, ret[0]
-    assert ret[1].include?("50%")
+    setup_mock(100, 200)
+    assert_equal 50, @analyzer.check_max_value("news", "id")
   end
 
   def test_check_max_value_when_empty
     setup_mock(0, 100)
-    ret = @analyzer.check_max_value("news", "id")
-
-    assert_equal Airooi::Report::INFO, ret[0]
-    assert ret[1].include?("0%")
-  end
-
-  def test_level_for
-    assert_equal Airooi::Report::INFO, @analyzer.level_for(0)
-    assert_equal Airooi::Report::INFO, @analyzer.level_for(10)
-    assert_equal Airooi::Report::INFO, @analyzer.level_for(74.9)
-    assert_equal Airooi::Report::WARN, @analyzer.level_for(75)
-    assert_equal Airooi::Report::WARN, @analyzer.level_for(99.9)
-    assert_equal Airooi::Report::ERROR, @analyzer.level_for(100)
+    assert_equal 0, @analyzer.check_max_value("news", "id")
   end
 
   def setup_mock(max_value, max_allowed_value)
