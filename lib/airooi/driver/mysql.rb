@@ -1,5 +1,5 @@
-module Airooi
-    class Dao
+module Airooi::Driver
+    class Mysql
 
         @@types = {
           "smallint"  => 32767,

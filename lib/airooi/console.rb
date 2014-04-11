@@ -10,9 +10,9 @@ module Airooi
 
       options = parse(params)
       client = connect(options)
-      dao = Airooi::Dao.new(client)
-      column = Airooi::Column.new(dao)
-      table = Airooi::Table.new(dao, column)
+      driver = Airooi::Driver::Mysql.new(client)
+      column = Airooi::Column.new(driver)
+      table = Airooi::Table.new(driver, column)
 
       reports = table.analyze_database()
 
