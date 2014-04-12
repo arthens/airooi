@@ -4,6 +4,10 @@
 
 This might seem like an unnecessary job, but if you are working on an old codebase that connects to MySql in non-strict mode this is far from impossible - I've been bitten by `MEDIUMINT` running out of valid unique IDs a couple of times myself.
 
+## Requirements
+
+`airooi` is tested on ruby `2.1.1`, `2.0.0` and `1.9.3`.
+
 ## Usage
 
 Just connect to the database and let the magic happen.
