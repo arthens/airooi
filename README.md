@@ -18,9 +18,9 @@ Just connect to the database and let the magic happen.
 
 By default it only shows columns over 75% of used IDs, add `-v` to get a view of all columns.
 
-## Can I use it to check other database?
+## What if I'm not using MySql?
 
-`airooi` comes with only a `mysql` driver. However, all the logic is contained in the driver so it should be pretty easy to add support for other databases. Pull requests are welcome :)
+`airooi` comes with a `mysql` driver only. However, all database-specific logic is contained in the driver so it should be pretty easy to add support for other databases. Pull requests are welcome :)
 
 ## Testing
 
