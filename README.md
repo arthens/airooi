@@ -6,7 +6,7 @@ This might seem like an unnecessary job, but if you are working on an old codeba
 
 ## Requirements
 
-`airooi` is tested on ruby `2.1.1`, `2.0.0` and `1.9.3`.
+`airooi` is tested on ruby `2.1.1`, `2.0.0` and `1.9.3`. Ruby `1.8.7` is currently not supported.
 
 ## Usage
 
