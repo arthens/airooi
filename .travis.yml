@@ -4,6 +4,7 @@ rvm:
   - 2.1.1
   - 2.0.0
   - 1.9.3
+  - 1.8.7
 
 before_script:
   - mysql -e 'CREATE DATABASE airooi_test;'
